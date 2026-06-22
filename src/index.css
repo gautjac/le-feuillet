@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background-color: theme("colors.paper.DEFAULT");
+    color: theme("colors.ink.DEFAULT");
+    font-family: theme("fontFamily.sans");
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(156, 59, 46, 0.18);
+  }
+}
+
+@layer components {
+  /* ── The writing surface (TipTap / ProseMirror) ─────────────────────────── */
+  .feuillet-editor {
+    font-family: theme("fontFamily.body");
+    color: theme("colors.ink.DEFAULT");
+    font-size: 1.32rem;
+    line-height: 1.74;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .feuillet-editor:focus {
+    outline: none;
+  }
+  .feuillet-editor .ProseMirror {
+    outline: none;
+    min-height: 60vh;
+  }
+  .feuillet-editor p {
+    margin: 0 0 1.15em;
+  }
+  .feuillet-editor h1,
+  .feuillet-editor h2,
+  .feuillet-editor h3 {
+    font-family: theme("fontFamily.display");
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    color: theme("colors.ink.DEFAULT");
+    margin: 1.5em 0 0.4em;
+  }
+  .feuillet-editor h1 {
+    font-size: 1.92em;
+  }
+  .feuillet-editor h2 {
+    font-size: 1.5em;
+  }
+  .feuillet-editor h3 {
+    font-size: 1.22em;
+  }
+  .feuillet-editor a {
+    color: theme("colors.madder.DEFAULT");
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+  }
+  .feuillet-editor strong {
+    font-weight: 600;
+  }
+  .feuillet-editor blockquote {
+    margin: 1.3em 0;
+    padding-left: 1.2em;
+    border-left: 3px solid theme("colors.madder.DEFAULT");
+    color: theme("colors.ink.soft");
+    font-style: italic;
+  }
+  .feuillet-editor ul,
+  .feuillet-editor ol {
+    margin: 0 0 1.15em;
+    padding-left: 1.5em;
+  }
+  .feuillet-editor li {
+    margin: 0.3em 0;
+  }
+  .feuillet-editor li::marker {
+    color: theme("colors.madder.DEFAULT");
+  }
+  .feuillet-editor hr {
+    border: 0;
+    text-align: center;
+    margin: 1.8em 0;
+  }
+  .feuillet-editor hr::before {
+    content: "✦";
+    color: theme("colors.ink.faint");
+    letter-spacing: 0.5em;
+    font-size: 0.85em;
+  }
+  .feuillet-editor img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.4em auto;
+    border-radius: 4px;
+    box-shadow: theme("boxShadow.leaf");
+  }
+  .feuillet-editor img.ProseMirror-selectednode {
+    outline: 2px solid theme("colors.madder.DEFAULT");
+    outline-offset: 3px;
+  }
+  .feuillet-editor pre {
+    background: theme("colors.ink.DEFAULT");
+    color: theme("colors.paper.DEFAULT");
+    font-family: theme("fontFamily.mono");
+    font-size: 0.82em;
+    line-height: 1.6;
+    padding: 1em 1.2em;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.3em 0;
+  }
+  .feuillet-editor code {
+    font-family: theme("fontFamily.mono");
+    font-size: 0.84em;
+    background: rgba(42, 35, 27, 0.07);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  .feuillet-editor pre code {
+    background: none;
+    padding: 0;
+  }
+  /* placeholder (empty first paragraph) */
+  .feuillet-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: theme("colors.ink.faint");
+    font-style: italic;
+  }
+}
+
+@layer utilities {
+  .scrollbar-quiet::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scrollbar-quiet::-webkit-scrollbar-thumb {
+    background: rgba(42, 35, 27, 0.16);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  .scrollbar-quiet::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
